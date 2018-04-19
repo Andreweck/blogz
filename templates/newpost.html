@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+    {% block content %}
+        <form action="post_entry" method="post">
+		<label for="first_name">Post subject:</label> 
+		<input id="first_name" type="text" name="post_name"></input>{{0}}
+            <label for="entry">Entry:</label>
+	    <textarea id="entry" name="entry"></textarea>{{1}}
+            <a href="/blog?id={{pstid}}"><input type="submit">
+            </a>
+        </form>
+        {% endblock %}
