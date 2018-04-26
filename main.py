@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -19,8 +19,15 @@ class entry(db.Model):
     def __init__(self, name, post_entry):
         self.name = name
         self.post_entry = post_entry
-@app.route("/newpost", methods=["POST"])
+            
+
+@app.route("/newpost")
 def newpost():
+    post_name = request.args.get('post_name')
+    entry = request.args.get('entry')
+    return render_template('newpost.html', c = '', o = '')
+@app.route("/submitted_form", methods=['POST'])
+def all_filled_out():
     subject = request.form['post_name']
     content = request.form['entry']
     gg = ""
@@ -37,56 +44,45 @@ def newpost():
         if 'P' in rgb:
             nam[1] = "Please give us content."
 
-        return render_template('newpost.html', str(nam[0]), str(nam[1]))
+        return render_template('newpost.html', c = str(nam[0]), o = str(nam[1]))
     elif len(gg) == 0:
-        subject = request.form['post_name']
-        content = request.form['entry']
-        if len(subject) > 0:
-            new_blog = entry(name = subject, post_entry = content)
-            db.session.add(new_blog)
-            db.session.commit()
-            dd = build-a-blog.query.get_id(subject)
-            return redirect("/blog?id={0}".format(dd))
-
-
-#@app.route("/newpost")
-#def newpost():
-#    subject = request.args.get('post_name')
-#    content = request.args.get('entry')
-#    return render_template('newpost.html', '')
-#    if request.method =='POST':
-#        subject = request.form['post_name']
-#        content = request.form['entry']
 #        if len(subject) > 0:
-#            new_blog = entry(name = subject, post_entry = content)
-#            db.session.add(new_blog)
-#            db.session.commit()
-#            dd = build-a-blog.query.get(subject)
-#            return redirect("/blog?id={0}".format(dd))
-#        else:
-#            return redirect
+        new_blog = entry(name = subject, post_entry = content)
+        db.session.add(new_blog)
+        db.session.commit()
+        dd = entry.query.filter_by(name=subject).first()
+        da = dd.id
+           # dbs = dd[-1].id()
+        return redirect("/blog?id={i}".format(i = da))
 
-@app.route("/blog", methods=["POST"])
+
+
+@app.route("/blog")
 def viewpost():
-    title = request.args.get['post_id']
-    return render_template('viewpost.html', title = title, entry = entry)
+    title = request.args.get('id')
+    id_num = int(title)
+    post = entry.query.get(id_num)
+    return render_template('viewpost.html', post_heading=post.name, post_content=post.post_entry)
 
 
 @app.route("/", methods=["POST", "GET"])
 def index():
-    posts = []
+    tbl_qry = entry.query.all()
+    #if len(tbl_qry) == 0:
+     #   return render_template('home.html', posts = "There are no posts as of yet")
+#    else:
+ #       plc_lst = []
+  #      posts = ['', '', '', '', '', '', '', '', '', '']
+   #     links =['', '', '', '', '', '', '', '', '', '']
+    #    plc_hldr = 0
+     #   for i in range(len(tbl_qry)):
+      #      posts[plc_hldr] = tbl_qry[plc_hldr].name
+       #     links[plc_hldr] = tbl_qry[plc_hldr].id
+        #    plc_hldr += 1
     
-    if request.method == 'POST':
-        post = request.form['blogpost']
-        if len(posts) < 10:
-            posts.append(post)
-        elif len(posts) >= 10:
-            posts.append(post)
-            first_post = posts[0]
-            posts.remove(first_post)
-
-    
-    return render_template('home.html', posts = posts)
+   
+    return render_template('home.html', tbl_qry = tbl_qry)
+            
 
 if __name__ == "__main__":
     app.run()

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
     {% block content %}
-        <form action="post_entry" method="post">
+        <form action="submitted_form" method="post">
 		<label for="first_name">Post subject:</label> 
-		<input id="first_name" type="text" name="post_name"></input>{{0}}
+		<input id="first_name" type="text" name="post_name"></input>{{c}}
             <label for="entry">Entry:</label>
-	    <textarea id="entry" name="entry"></textarea>{{1}}
-            <a href="/blog?id={{pstid}}"><input type="submit">
-            </a>
+	    <textarea id="entry" name="entry"></textarea>{{o}}
+            <input type="submit">
+            
         </form>
         {% endblock %}
