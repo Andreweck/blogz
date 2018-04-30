@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="redd">{{error}}</h2>
+<form action="login" method="post">
+    <label><h6>Username:</h6><input id="usrnme" type="text" name="usrnme" value={{ufld}}></input>&nbsp<p><b>{{f}}</b></p><br></label>
+    <label><h6>Password:</h6><input id="psswd" type="password" name="psswd"></input><p><b>{{s}}</b></p><br>&nbsp</label>
+    <input type="submit"/>
+</form>
+
+<p>Do not have an account?<a href="/register">Create one!</a></p>
+{% endblock %}

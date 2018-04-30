@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+{% if usr_qry|length is equalto 0 %}
+<h1>There are no posts as of yet.</h1>
+{% else %}
+    <ul>
+	{% for user in usr_qry %}
+	<li><a href="/profile?id={{user.id}}"><h3>{{user.name}}</h3></a>
+	
+	
+	{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
