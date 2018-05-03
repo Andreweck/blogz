@@ -9,7 +9,7 @@
 	{% for posts in tbl_qry %}
 	<li><a href="/blog?id={{posts.id}}"><h3>{{posts.name}}</h3></a>
     <br><p>{{posts.post_entry}}</p></li><br>
-    <p><em>Written by <a href="/profile?id={{posts.user}}">{{name}}</a>.</em></p>
+    <p><em>Written by <a href="/profile?id={{posts.user_id}}">{{usr}}</a>.</em></p>
 	
 	{% endfor %}
 </ul>

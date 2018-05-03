@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-            form {
-                background-color: #eee;
-                padding: 40px;
-                margin: 0 auto;
-                width: 1040px;
-                font: 16px sans-serif;
-                border-radius: 10px;
-            }
-            p { color: red; display: -webkit-inline-box}
-    </style>
-</head>
-<body> 
+{% extends "base.html" %}
+{% block content %}
 
-    <form action="fll" method="post">
+    <form action="register" method="post">
 	    <label><h6>Username:</h6><input id="usrnme" type="text" name="usrnme" value={{ufld}}></input>&nbsp<p><b>{{f}}</b></p><br></label>
         <label><h6>Password:</h6><input id="psswd" type="password" name="psswd"></input><p><b>{{s}}</b></p><br>&nbsp</label>
         <label><h6>Confirm Password:</h6><input id="confm_psswd" type="password" name="confm_psswd"></input>&nbsp<p><b>{{t}}</b></p><br></label>
 	    <label><h6>E-mail address:</h6><input id="eml" type="text" name="eml" value={{efld}}></label></input>&nbsp<p><b>{{sm}}</b></p><br></label>
         <input type="submit" />
     </form>
-    
-    
-</body>
-</html>
+{% endblock %}    

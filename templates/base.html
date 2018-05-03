@@ -15,12 +15,15 @@
                 width: 540px;
                 height: 120px;
             }
+            #left-alligned {align-content: flex-start}
+            #right-alligned {align-content: flex-end }
         </style>
     </head>
     <body>
             <header>
-                    <div class="left-alligned"><a href="/"><p class="small_font">Main Page</a>&nbsp|&nbsp<a href="/newpost">New blog post</p></a></div>
-		    <div class="right-aligned"><p class="small_font"><a href="/register">New Account</a>&nbsp|&nbsp<a href="/login">login</a><a href="logout">logoff</a></p></div>
+                    <div class="left-alligned"><a href="/"><p class="small_font">Main Page</a>&nbsp|&nbsp<a href="/newpost">New Blog Post</p></a></div>
+            <div class="right-aligned"><p class="small_font"><a href="/login">Login</a>&nbsp
+                |&nbsp<a href="logout">Logoff</a>&nbsp|&nbsp<a href="blog_posts">All Posts</a></p></div>
 
             </header>
             {% block content %}
